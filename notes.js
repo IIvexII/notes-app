@@ -1,6 +1,19 @@
 const fs = require("fs");
 const chalk = require("chalk");
 
+const readNote = (title) => {
+  const notes = fetchNotes();
+  const foundNote = notes.find(note => note.title === title);
+
+  if (foundNote) {
+    console.log(chalk.blue.bold(foundNote.title));
+    console.log(chalk.cyanBright.bold(foundNote.body));
+    console.log(chalk.green.inverse.bold("Successfully Found Notes!"));
+  } else {
+    console.log(chalk.red.inverse.bold("Note not found!"));
+  }
+}
+
 const listNotes = () => {
   const notes = fetchNotes();
 
@@ -57,6 +70,7 @@ const writeToFile = (notes) => {
 
 module.exports = {
   listNotes:listNotes,
+  readNote:readNote,
   addNotes:addNotes,
   removeNotes:removeNotes
 };
